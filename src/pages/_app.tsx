@@ -12,12 +12,23 @@ export default function App({ Component, pageProps }: AppProps) {
 
   //useEffect(() => {
   //  async function setUrl() {
+    let version: number | null = null
       let preview_token: string | undefined = undefined
       if (typeof window !== "undefined" && window.location !== undefined) {
         const queryString = window?.location?.search;
         const urlParams = new URLSearchParams(queryString);
         preview_token = urlParams.get('preview_token') ?? undefined;
+
+        const pathArray = window?.location?.pathname?.split('/')
+        var contentId = pathArray[pathArray.length - 1]
+    
+        var contentIdArray = contentId.split('_')
+        if (contentIdArray.length > 1) {
+          version = contentIdArray[contentIdArray.length - 1] as unknown as number
+        }
       }
+
+      pageProps.version = version
 
       if (preview_token) {
         headers = { Authorization: 'Bearer ' + preview_token }
