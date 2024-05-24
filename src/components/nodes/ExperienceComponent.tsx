@@ -1,20 +1,19 @@
 import React, { FC } from 'react'
 import { useQuery } from '@apollo/client'
 
-import CompositionNodeComponent from './CompositionNodeComponent'
 import { graphql } from '@/graphql'
+import GridNodeComponent from './GridNodeComponent'
  
 export const VisualBuilder = graphql(/* GraphQL */ `
     query VisualBuilder($version:String) {
         Experience(where: { _metadata: { version: { eq: $version } } }) {
             items {
                 _metadata {
-                    __typename
+                    version
                     ... on CompositionMetadata {
                         composition {
-                            layoutType
-                            nodes {
-                                ...compositionNode
+                            grids: nodes {
+                                ...gridNode
                             }
                         }
                     }
@@ -31,23 +30,27 @@ interface VisualBuilderProps {
 const VisualBuilderComponent: FC<VisualBuilderProps> = ({ version }) => {
     const { data } = useQuery(VisualBuilder, { variables: { version } })
  
-    data?.Experience?.items?.map((experience) => {
-        if(experience?._metadata?.__typename === "CompositionMetadata") {
-            return (
-                <div key="unstructuredData" className="relative w-full flex-1 vb:outline">
-                    {
-                        experience?._metadata?.composition?.nodes?.map((node) => {
-                            if(node) {
-                                return <CompositionNodeComponent compositionNode={node} />
-                            }
-                        })
+    return (
+        <div key="unstructuredData" className="relative w-full flex-1 vb:outline">
+            {
+                data?.Experience?.items?.map((experience) => {
+                    if(experience?._metadata?.__typename === "CompositionMetadata") {
+                        return (
+                            <div key="unstructuredData" className="relative w-full flex-1 vb:outline">
+                                {
+                                    experience?._metadata?.composition?.grids?.map((grid) => {
+                                        if(grid?.__typename === "CompositionStructureNode") {
+                                            return <GridNodeComponent gridNode={grid} />
+                                        }
+                                    })
+                                }
+                            </div>
+                        )
                     }
-                </div>
-            )
-        }
-    })
-
-    return (<div></div>)
+                })
+            }
+        </div>
+    )
 }
  
 export default VisualBuilderComponent
