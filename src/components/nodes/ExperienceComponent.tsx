@@ -3,24 +3,48 @@ import { useQuery } from '@apollo/client'
 
 import { graphql } from '@/graphql'
 import GridNodeComponent from './GridNodeComponent'
+import ParagraphElementComponent from '../elements/ElementNodeComponent'
  
 export const VisualBuilder = graphql(/* GraphQL */ `
-    query VisualBuilder($version:String) {
-        Experience(where: { _metadata: { version: { eq: $version } } }) {
-            items {
-                _metadata {
-                    version
-                    ... on CompositionMetadata {
-                        composition {
-                            grids: nodes {
-                                ...gridNode
+query VisualBuilder($version: String) {
+  Experience(where: { _metadata: { version: { eq: $version } } }) {
+    items {
+      _metadata {
+        version
+        ... on CompositionMetadata {
+          composition {
+            grids: nodes {
+              ... on CompositionStructureNode {
+                key
+                rows: nodes {
+                  ... on CompositionStructureNode {
+                    key
+                    columns: nodes {
+                      ... on CompositionStructureNode {
+                        key
+                        elements: nodes {
+                          ... on CompositionElementNode {
+                            key
+                            element {
+                              _metadata {
+                                types
+                              }
+                              ...paragraphElement
                             }
+                          }
                         }
+                      }
                     }
+                  }
                 }
+              }
             }
+          }
         }
+      }
     }
+  }
+}
 `)
 
 interface VisualBuilderProps {
@@ -40,7 +64,45 @@ const VisualBuilderComponent: FC<VisualBuilderProps> = ({ version }) => {
                                 {
                                     experience?._metadata?.composition?.grids?.map((grid) => {
                                         if(grid?.__typename === "CompositionStructureNode") {
-                                            return <GridNodeComponent gridNode={grid} />
+                                            return (
+                                                <div className="relative w-full flex flex-col flex-nowrap justify-start vb:grid" data-epi-block-id={grid?.key}>
+                                                    {
+                                                        grid.rows?.map((row) => {
+                                                            if(row?.__typename === "CompositionStructureNode") {
+                                                                return (
+                                                                    <div className="flex-1 flex flex-row flex-nowrap justify-start vb:row">
+                                                                        {
+                                                                            row.columns?.map((column) => {
+                                                                                if(column?.__typename === "CompositionStructureNode") {
+                                                                                    return (
+                                                                                        <div className="flex-1 flex flex-col flex-nowrap justify-start vb:col">
+                                                                                            {
+                                                                                                column.elements?.map((node) => {
+                                                                                                    if(node?.__typename === "CompositionElementNode") {
+                                                                                                        if(node.element?.__typename === "ParagraphElement") {
+                                                                                                            return (
+                                                                                                                <div data-epi-block-id={node.key} key={node.key}>
+                                                                                                                    <ParagraphElementComponent paragraphElement={node.element} />
+                                                                                                                </div>
+                                                                                                            )
+                                                                                                        } else {
+                                                                                                            return (<>NotImplementedException</>)
+                                                                                                        }
+                                                                                                    }
+                                                                                                })
+                                                                                            }
+                                                                                        </div>
+                                                                                    )
+                                                                                }
+                                                                            })
+                                                                        }
+                                                                    </div>
+                                                                )
+                                                            }
+                                                        })
+                                                    }
+                                                </div>
+                                            )
                                         }
                                     })
                                 }
