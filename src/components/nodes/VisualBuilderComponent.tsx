@@ -81,9 +81,11 @@ const VisualBuilderComponent: FC<VisualBuilderProps> = ({ version }) => {
                                                                                     switch(node.element?.__typename)
                                                                                     {
                                                                                         case "ParagraphElement": {
-                                                                                            <div data-epi-block-id={node.key} key={node.key}>
-                                                                                                <ParagraphElementComponent paragraphElement={node.element} />
-                                                                                            </div>
+                                                                                            return (
+                                                                                                <div data-epi-block-id={node.key} key={node.key}>
+                                                                                                    <ParagraphElementComponent paragraphElement={node.element} />
+                                                                                                </div>
+                                                                                            )
                                                                                         }
                                                                                         default: {
                                                                                             return (<>NotImplementedException</>)
