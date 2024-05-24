@@ -1,4 +1,4 @@
-import VisualBuilderComponent from "@/components/nodes/ExperienceComponent";
+import VisualBuilderComponent from "@/components/nodes/VisualBuilderComponent";
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
