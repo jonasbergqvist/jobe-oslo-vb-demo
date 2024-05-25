@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { useQuery } from '@apollo/client'
 
 import { graphql } from '@/graphql'
-import ParagraphElementComponent from '../elements/ParagraphElementComponent'
+import CompositionElementNodeComponent from './CompositionElementNodeComponent'
  
 export const VisualBuilder = graphql(/* GraphQL */ `
 query VisualBuilder($version: String) {
@@ -22,15 +22,7 @@ query VisualBuilder($version: String) {
                       ... on CompositionStructureNode {
                         key
                         elements: nodes {
-                          ... on CompositionElementNode {
-                            key
-                            element {
-                              _metadata {
-                                types
-                              }
-                              ...paragraphElement
-                            }
-                          }
+                          ...compositionElementNode
                         }
                       }
                     }
@@ -78,19 +70,7 @@ const VisualBuilderComponent: FC<VisualBuilderProps> = ({ version }) => {
                                                                             {
                                                                             column.elements?.map((node) => {
                                                                                 if(node?.__typename === "CompositionElementNode") {
-                                                                                    switch(node.element?.__typename)
-                                                                                    {
-                                                                                        case "ParagraphElement": {
-                                                                                            return (
-                                                                                                <div data-epi-block-id={node.key} key={node.key}>
-                                                                                                    <ParagraphElementComponent paragraphElement={node.element} />
-                                                                                                </div>
-                                                                                            )
-                                                                                        }
-                                                                                        default: {
-                                                                                            return (<>NotImplementedException</>)
-                                                                                        }
-                                                                                    }
+                                                                                  return <CompositionElementNodeComponent compositionElementNode={node} />
                                                                                 }
                                                                             })
                                                                             }

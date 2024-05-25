@@ -1,4 +1,4 @@
-import VisualBuilderComponent from "@/components/nodes/VisualBuilderComponent";
+import VisualBuilderComponent from "@/components/base/VisualBuilderComponent";
 import { AppProps } from "next/app";
 import { Inter } from "next/font/google";
 
