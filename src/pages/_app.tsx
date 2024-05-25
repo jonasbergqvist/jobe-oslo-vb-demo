@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
     uri: 'https://beta2.cg.optimizely.com/content/v2?auth=nSabkbOsWUA55R2YBSYvuGCOgfAnEqE5Zah5fTHsaKlm1kQi',
   });
   let headers: Record<string, string> | undefined = undefined
-
+/*
   //useEffect(() => {
   //  async function setUrl() {
     let version: number | null = null
@@ -45,7 +45,7 @@ export default function App({ Component, pageProps }: AppProps) {
   //  }
   //  setUrl();
   //}, [])
-
+*/
   let client = new ApolloClient({
     link: httpLink,
     cache: new InMemoryCache(),
