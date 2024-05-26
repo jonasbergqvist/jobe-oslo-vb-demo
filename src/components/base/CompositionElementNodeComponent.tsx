@@ -1,6 +1,10 @@
 import { FragmentType, useFragment } from '../../graphql/fragment-masking'
 import { graphql } from '@/graphql'
 import ParagraphElementComponent from '../elements/ParagraphElementComponent'
+import BlogReferenceElementComponent from '../elements/BlogReferenceComponent'
+import NewsReferenceComponent from '../elements/NewsReferenceComponent'
+import HeadingElementComponent from '../elements/HeadingElementComponent'
+import ImageElementComponent from '../elements/ImageElementComponent'
  
 export const CompositionElementNodeFragment = graphql(/* GraphQL */ `
     fragment compositionElementNode on CompositionElementNode {
@@ -10,6 +14,10 @@ export const CompositionElementNodeFragment = graphql(/* GraphQL */ `
                 types
             }
             ...paragraphElement
+            ...blogReferenceElement
+            ...newsReferenceElement
+            ...headingElement
+            ...imageElement
         }
     }
 `)
@@ -23,6 +31,14 @@ const CompositionElementNodeComponent = (props: {
     {
         case "ParagraphElement":
             return <ParagraphElementComponent paragraphElement={element} />
+        case "HeadingElement":
+                return <HeadingElementComponent headingElement={element} />
+        case "ImageElement":
+            return <ImageElementComponent imageElement={element} />
+        case "BlogReferenceElement":
+            return <BlogReferenceElementComponent blogReferenceElement={element} />
+        case "NewsReferenceElement":
+            return <NewsReferenceComponent newsReferenceElement={element} />
         default:
             return <>NotImplementedException</>
     }

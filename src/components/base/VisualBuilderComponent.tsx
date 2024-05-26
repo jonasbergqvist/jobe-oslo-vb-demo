@@ -2,11 +2,11 @@ import React, { FC } from 'react'
 import { useQuery } from '@apollo/client'
 
 import { graphql } from '@/graphql'
-import CompositionElementNodeComponent from './CompositionElementNodeComponent'
+import CompositionElementNodeComponent from './compositionElementNodeComponent'
  
 export const VisualBuilder = graphql(/* GraphQL */ `
-query VisualBuilder($version: String) {
-  Experience(where: { _metadata: { version: { eq: $version } } }) {
+query VisualBuilder($key: String, $version: String) {
+  Experience(where: { _metadata: { key: { eq: $key } version: { eq: $version } } }) {
     items {
       _metadata {
         version
