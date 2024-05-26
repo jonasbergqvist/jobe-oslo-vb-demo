@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { useQuery } from '@apollo/client'
 
 import { graphql } from '@/graphql'
-import CompositionElementNodeComponent from './compositionElementNodeComponent'
+import CompositionNodeComponent from './CompositionNodeComponent'
  
 export const VisualBuilder = graphql(/* GraphQL */ `
 query VisualBuilder($key: String, $version: String) {
@@ -70,7 +70,7 @@ const VisualBuilderComponent: FC<VisualBuilderProps> = ({ version }) => {
                                                                             {
                                                                             column.elements?.map((node) => {
                                                                                 if(node?.__typename === "CompositionElementNode") {
-                                                                                  return <CompositionElementNodeComponent compositionElementNode={node} />
+                                                                                  return <CompositionNodeComponent compositionElementNode={node} />
                                                                                 }
                                                                             })
                                                                             }

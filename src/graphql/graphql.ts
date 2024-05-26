@@ -3161,20 +3161,6 @@ export enum System_Locales {
   Neutral = 'NEUTRAL'
 }
 
-export type VisualBuilderQueryVariables = Exact<{
-  key?: InputMaybe<Scalars['String']['input']>;
-  version?: InputMaybe<Scalars['String']['input']>;
-}>;
-
-
-export type VisualBuilderQuery = { __typename?: 'Query', Experience?: { __typename?: 'ExperienceOutput', items?: Array<{ __typename?: 'BlankExperience', _metadata?: { __typename?: 'CompositionMetadata', version?: string | null, composition?: { __typename?: 'CompositionStructureNode', grids?: Array<{ __typename?: 'CompositionElementNode' } | { __typename?: 'CompositionNode' } | { __typename?: 'CompositionStructureNode', key?: string | null, rows?: Array<{ __typename?: 'CompositionElementNode' } | { __typename?: 'CompositionNode' } | { __typename?: 'CompositionStructureNode', key?: string | null, columns?: Array<{ __typename?: 'CompositionElementNode' } | { __typename?: 'CompositionNode' } | { __typename?: 'CompositionStructureNode', key?: string | null, elements?: Array<(
-                  { __typename?: 'CompositionElementNode' }
-                  & { ' $fragmentRefs'?: { 'CompositionElementNodeFragment': CompositionElementNodeFragment } }
-                ) | { __typename?: 'CompositionNode' } | { __typename?: 'CompositionStructureNode' } | null> | null } | null> | null } | null> | null } | null> | null } | null } | { __typename?: 'ContentMetadata', version?: string | null } | { __typename?: 'InstanceMetadata', version?: string | null } | { __typename?: 'ItemMetadata', version?: string | null } | { __typename?: 'MediaMetadata', version?: string | null } | null } | { __typename?: 'Experience', _metadata?: { __typename?: 'CompositionMetadata', version?: string | null, composition?: { __typename?: 'CompositionStructureNode', grids?: Array<{ __typename?: 'CompositionElementNode' } | { __typename?: 'CompositionNode' } | { __typename?: 'CompositionStructureNode', key?: string | null, rows?: Array<{ __typename?: 'CompositionElementNode' } | { __typename?: 'CompositionNode' } | { __typename?: 'CompositionStructureNode', key?: string | null, columns?: Array<{ __typename?: 'CompositionElementNode' } | { __typename?: 'CompositionNode' } | { __typename?: 'CompositionStructureNode', key?: string | null, elements?: Array<(
-                  { __typename?: 'CompositionElementNode' }
-                  & { ' $fragmentRefs'?: { 'CompositionElementNodeFragment': CompositionElementNodeFragment } }
-                ) | { __typename?: 'CompositionNode' } | { __typename?: 'CompositionStructureNode' } | null> | null } | null> | null } | null> | null } | null> | null } | null } | { __typename?: 'ContentMetadata', version?: string | null } | { __typename?: 'InstanceMetadata', version?: string | null } | { __typename?: 'ItemMetadata', version?: string | null } | { __typename?: 'MediaMetadata', version?: string | null } | null } | null> | null } | null };
-
 export type CompositionElementNodeFragment = { __typename?: 'CompositionElementNode', key?: string | null, element?: (
     { __typename?: 'BlogReferenceElement', _metadata?: { __typename?: 'CompositionMetadata', types?: Array<string | null> | null } | { __typename?: 'ContentMetadata', types?: Array<string | null> | null } | { __typename?: 'InstanceMetadata', types?: Array<string | null> | null } | { __typename?: 'ItemMetadata', types?: Array<string | null> | null } | { __typename?: 'MediaMetadata', types?: Array<string | null> | null } | null }
     & { ' $fragmentRefs'?: { 'BlogReferenceElementFragment': BlogReferenceElementFragment } }
@@ -3191,6 +3177,20 @@ export type CompositionElementNodeFragment = { __typename?: 'CompositionElementN
     { __typename?: 'ParagraphElement', _metadata?: { __typename?: 'CompositionMetadata', types?: Array<string | null> | null } | { __typename?: 'ContentMetadata', types?: Array<string | null> | null } | { __typename?: 'InstanceMetadata', types?: Array<string | null> | null } | { __typename?: 'ItemMetadata', types?: Array<string | null> | null } | { __typename?: 'MediaMetadata', types?: Array<string | null> | null } | null }
     & { ' $fragmentRefs'?: { 'ParagraphElementFragment': ParagraphElementFragment } }
   ) | null } & { ' $fragmentName'?: 'CompositionElementNodeFragment' };
+
+export type VisualBuilderQueryVariables = Exact<{
+  key?: InputMaybe<Scalars['String']['input']>;
+  version?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type VisualBuilderQuery = { __typename?: 'Query', Experience?: { __typename?: 'ExperienceOutput', items?: Array<{ __typename?: 'BlankExperience', _metadata?: { __typename?: 'CompositionMetadata', version?: string | null, composition?: { __typename?: 'CompositionStructureNode', grids?: Array<{ __typename?: 'CompositionElementNode' } | { __typename?: 'CompositionNode' } | { __typename?: 'CompositionStructureNode', key?: string | null, rows?: Array<{ __typename?: 'CompositionElementNode' } | { __typename?: 'CompositionNode' } | { __typename?: 'CompositionStructureNode', key?: string | null, columns?: Array<{ __typename?: 'CompositionElementNode' } | { __typename?: 'CompositionNode' } | { __typename?: 'CompositionStructureNode', key?: string | null, elements?: Array<(
+                  { __typename?: 'CompositionElementNode' }
+                  & { ' $fragmentRefs'?: { 'CompositionElementNodeFragment': CompositionElementNodeFragment } }
+                ) | { __typename?: 'CompositionNode' } | { __typename?: 'CompositionStructureNode' } | null> | null } | null> | null } | null> | null } | null> | null } | null } | { __typename?: 'ContentMetadata', version?: string | null } | { __typename?: 'InstanceMetadata', version?: string | null } | { __typename?: 'ItemMetadata', version?: string | null } | { __typename?: 'MediaMetadata', version?: string | null } | null } | { __typename?: 'Experience', _metadata?: { __typename?: 'CompositionMetadata', version?: string | null, composition?: { __typename?: 'CompositionStructureNode', grids?: Array<{ __typename?: 'CompositionElementNode' } | { __typename?: 'CompositionNode' } | { __typename?: 'CompositionStructureNode', key?: string | null, rows?: Array<{ __typename?: 'CompositionElementNode' } | { __typename?: 'CompositionNode' } | { __typename?: 'CompositionStructureNode', key?: string | null, columns?: Array<{ __typename?: 'CompositionElementNode' } | { __typename?: 'CompositionNode' } | { __typename?: 'CompositionStructureNode', key?: string | null, elements?: Array<(
+                  { __typename?: 'CompositionElementNode' }
+                  & { ' $fragmentRefs'?: { 'CompositionElementNodeFragment': CompositionElementNodeFragment } }
+                ) | { __typename?: 'CompositionNode' } | { __typename?: 'CompositionStructureNode' } | null> | null } | null> | null } | null> | null } | null> | null } | null } | { __typename?: 'ContentMetadata', version?: string | null } | { __typename?: 'InstanceMetadata', version?: string | null } | { __typename?: 'ItemMetadata', version?: string | null } | { __typename?: 'MediaMetadata', version?: string | null } | null } | null> | null } | null };
 
 export type BlogReferenceElementFragment = { __typename?: 'BlogReferenceElement', ImageReference?: { __typename?: 'ContentReference', url?: { __typename?: 'ContentUrl', default?: string | null } | null } | null, BlogPostReference?: { __typename?: 'BlankExperience' } | { __typename?: 'BlankSection' } | { __typename?: 'BlogReferenceElement' } | { __typename?: 'BlogpostBlock', TeaserText?: string | null, Author?: string | null } | { __typename?: 'Component' } | { __typename?: 'Content' } | { __typename?: 'Element' } | { __typename?: 'Experience' } | { __typename?: 'Folder' } | { __typename?: 'GenericMedia' } | { __typename?: 'HeadingElement' } | { __typename?: 'Image' } | { __typename?: 'ImageElement' } | { __typename?: 'ImageMedia' } | { __typename?: 'Media' } | { __typename?: 'NewsBlock' } | { __typename?: 'NewsReferenceElement' } | { __typename?: 'Page' } | { __typename?: 'ParagraphElement' } | { __typename?: 'Section' } | { __typename?: 'SysContentFolder' } | { __typename?: 'Video' } | { __typename?: 'VideoMedia' } | null } & { ' $fragmentName'?: 'BlogReferenceElementFragment' };
 
