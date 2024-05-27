@@ -30,15 +30,15 @@ const CompositionElementNodeComponent = (props: {
     switch(element?.__typename)
     {
         case "ParagraphElement":
-            return <ParagraphElementComponent paragraphElement={element} />
+            return <div data-epi-block-id={compositionElementNode.key}><ParagraphElementComponent paragraphElement={element} /></div>
         case "HeadingElement":
-                return <HeadingElementComponent headingElement={element} />
+            return <div data-epi-block-id={compositionElementNode.key}><HeadingElementComponent headingElement={element} /></div>
         case "ImageElement":
-            return <ImageElementComponent imageElement={element} />
+            return <div data-epi-block-id={compositionElementNode.key}><ImageElementComponent imageElement={element} /></div>
         case "BlogReferenceElement":
-            return <BlogReferenceElementComponent blogReferenceElement={element} />
+            return <div data-epi-block-id={compositionElementNode.key}><BlogReferenceElementComponent blogReferenceElement={element} /></div>
         case "NewsReferenceElement":
-            return <NewsReferenceComponent newsReferenceElement={element} />
+            return <div data-epi-block-id={compositionElementNode.key}><NewsReferenceComponent newsReferenceElement={element} /></div>
         default:
             return <>NotImplementedException</>
     }
