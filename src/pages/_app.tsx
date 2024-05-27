@@ -1,10 +1,8 @@
 import "@/styles/globals.css";
-import { createHttpLink, ApolloClient, InMemoryCache, ApolloProvider, ApolloLink, NormalizedCacheObject } from "@apollo/client";
+import { ApolloProvider } from "@apollo/client";
 import type { AppProps } from "next/app";
-import { useState } from "react";
-
-//const [apolloClient, setApolloClient]: ApolloClient | undefined = useState(() => undefined)
-
+import client from './apolloClient';
+/*
 function createApolloClient() {
 
   let version: number | null = null
@@ -48,13 +46,13 @@ function createApolloClient() {
     });
   }
 }
-
+*/
 export default function App({ Component, pageProps }: AppProps) {
 
-  const client = createApolloClient()
+  //const client = createApolloClient()
 
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={client!}>
       <Component {...pageProps} />
     </ApolloProvider>
   );
