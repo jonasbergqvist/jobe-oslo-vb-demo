@@ -26,6 +26,11 @@ if (typeof window !== "undefined" && window.location !== undefined) {
             link: authLink.concat(httpLink),
             cache: new InMemoryCache()
         });
+
+        const communicationScript = document.createElement('script');
+        communicationScript.src = `https://app-ocxcjobe11znb7p003.cms.optimizely.com/Util/javascript/communicationinjector.js`;
+        communicationScript.setAttribute('data-nscript', 'afterInteractive')
+        document.body.appendChild(communicationScript);
     }
 }
 
