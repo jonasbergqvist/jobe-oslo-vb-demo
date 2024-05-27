@@ -1,11 +1,12 @@
 import "@/styles/globals.css";
-import { createHttpLink, ApolloClient, InMemoryCache, ApolloProvider, ApolloLink } from "@apollo/client";
+import { createHttpLink, ApolloClient, InMemoryCache, ApolloProvider, ApolloLink, NormalizedCacheObject } from "@apollo/client";
 import type { AppProps } from "next/app";
+import { useState } from "react";
 
-export default function App({ Component, pageProps }: AppProps) {
+//const [apolloClient, setApolloClient]: ApolloClient | undefined = useState(() => undefined)
 
-  let httpLink: ApolloLink
-  let headers: Record<string, string> | undefined = undefined
+function createApolloClient() {
+
   let version: number | null = null
   let preview_token: string | undefined = undefined
   if (typeof window !== "undefined" && window.location !== undefined) {
@@ -25,27 +26,32 @@ export default function App({ Component, pageProps }: AppProps) {
   //pageProps.version = version
 
   if (preview_token) {
-    headers = { Authorization: 'Bearer ' + preview_token }
-    
-    httpLink = createHttpLink({
-      uri: 'https://beta2.cg.optimizely.com/content/v2?cache=false',
-    });
-
     const communicationScript = document.createElement('script');
     communicationScript.src = `https://app-ocxcjobe11znb7p003.cms.optimizely.com/Util/javascript/communicationinjector.js`;
     communicationScript.setAttribute('data-nscript', 'afterInteractive')
     document.body.appendChild(communicationScript);
+
+    return new ApolloClient({
+      link: createHttpLink({
+        uri: 'https://beta2.cg.optimizely.com/content/v2?cache=false',
+      }),
+      cache: new InMemoryCache(),
+      headers: { Authorization: 'Bearer ' + preview_token }
+    });
+
   } else {
-    httpLink = createHttpLink({
-      uri: 'https://beta2.cg.optimizely.com/content/v2?auth=nSabkbOsWUA55R2YBSYvuGCOgfAnEqE5Zah5fTHsaKlm1kQi',
+    return new ApolloClient({
+      link: createHttpLink({
+        uri: 'https://beta2.cg.optimizely.com/content/v2?auth=nSabkbOsWUA55R2YBSYvuGCOgfAnEqE5Zah5fTHsaKlm1kQi',
+      }),
+      cache: new InMemoryCache()
     });
   }
+}
 
-  let client = new ApolloClient({
-    link: httpLink,
-    cache: new InMemoryCache(),
-    headers: headers
-  });
+export default function App({ Component, pageProps }: AppProps) {
+
+  const client = createApolloClient()
 
   return (
     <ApolloProvider client={client}>
